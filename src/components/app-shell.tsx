@@ -2,7 +2,9 @@ import { Link, useRouterState } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import {
   Bell,
+  Building2,
   CalendarHeart,
+  Cog,
   Home,
   LayoutDashboard,
   LogOut,
@@ -31,6 +33,9 @@ const nav = [
 const adminNav = [
   { to: "/staff", icon: LayoutDashboard, label: "Staff" },
   { to: "/admin", icon: ShieldCheck, label: "Admin" },
+  { to: "/verification", icon: ShieldCheck, label: "Verification" },
+  { to: "/clinic", icon: Building2, label: "Clinic" },
+  { to: "/settings", icon: Cog, label: "Settings" },
 ];
 
 export function AppShell({ children }: { children: ReactNode }) {

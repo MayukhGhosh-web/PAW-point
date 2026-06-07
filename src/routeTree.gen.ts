@@ -9,11 +9,16 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as VerificationRouteImport } from './routes/verification'
 import { Route as StaffRouteImport } from './routes/staff'
+import { Route as SettingsRouteImport } from './routes/settings'
+import { Route as RoleRouteImport } from './routes/role'
 import { Route as ProfileRouteImport } from './routes/profile'
 import { Route as PetsRouteImport } from './routes/pets'
 import { Route as NotificationsRouteImport } from './routes/notifications'
+import { Route as LandingRouteImport } from './routes/landing'
 import { Route as HomeRouteImport } from './routes/home'
+import { Route as ClinicRouteImport } from './routes/clinic'
 import { Route as BookingsRouteImport } from './routes/bookings'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AdminRouteImport } from './routes/admin'
@@ -22,9 +27,24 @@ import { Route as VetsIndexRouteImport } from './routes/vets.index'
 import { Route as VetsIdRouteImport } from './routes/vets.$id'
 import { Route as BookIdRouteImport } from './routes/book.$id'
 
+const VerificationRoute = VerificationRouteImport.update({
+  id: '/verification',
+  path: '/verification',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const StaffRoute = StaffRouteImport.update({
   id: '/staff',
   path: '/staff',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SettingsRoute = SettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RoleRoute = RoleRouteImport.update({
+  id: '/role',
+  path: '/role',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ProfileRoute = ProfileRouteImport.update({
@@ -42,9 +62,19 @@ const NotificationsRoute = NotificationsRouteImport.update({
   path: '/notifications',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LandingRoute = LandingRouteImport.update({
+  id: '/landing',
+  path: '/landing',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const HomeRoute = HomeRouteImport.update({
   id: '/home',
   path: '/home',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ClinicRoute = ClinicRouteImport.update({
+  id: '/clinic',
+  path: '/clinic',
   getParentRoute: () => rootRouteImport,
 } as any)
 const BookingsRoute = BookingsRouteImport.update({
@@ -88,11 +118,16 @@ export interface FileRoutesByFullPath {
   '/admin': typeof AdminRoute
   '/auth': typeof AuthRoute
   '/bookings': typeof BookingsRoute
+  '/clinic': typeof ClinicRoute
   '/home': typeof HomeRoute
+  '/landing': typeof LandingRoute
   '/notifications': typeof NotificationsRoute
   '/pets': typeof PetsRoute
   '/profile': typeof ProfileRoute
+  '/role': typeof RoleRoute
+  '/settings': typeof SettingsRoute
   '/staff': typeof StaffRoute
+  '/verification': typeof VerificationRoute
   '/book/$id': typeof BookIdRoute
   '/vets/$id': typeof VetsIdRoute
   '/vets/': typeof VetsIndexRoute
@@ -102,11 +137,16 @@ export interface FileRoutesByTo {
   '/admin': typeof AdminRoute
   '/auth': typeof AuthRoute
   '/bookings': typeof BookingsRoute
+  '/clinic': typeof ClinicRoute
   '/home': typeof HomeRoute
+  '/landing': typeof LandingRoute
   '/notifications': typeof NotificationsRoute
   '/pets': typeof PetsRoute
   '/profile': typeof ProfileRoute
+  '/role': typeof RoleRoute
+  '/settings': typeof SettingsRoute
   '/staff': typeof StaffRoute
+  '/verification': typeof VerificationRoute
   '/book/$id': typeof BookIdRoute
   '/vets/$id': typeof VetsIdRoute
   '/vets': typeof VetsIndexRoute
@@ -117,11 +157,16 @@ export interface FileRoutesById {
   '/admin': typeof AdminRoute
   '/auth': typeof AuthRoute
   '/bookings': typeof BookingsRoute
+  '/clinic': typeof ClinicRoute
   '/home': typeof HomeRoute
+  '/landing': typeof LandingRoute
   '/notifications': typeof NotificationsRoute
   '/pets': typeof PetsRoute
   '/profile': typeof ProfileRoute
+  '/role': typeof RoleRoute
+  '/settings': typeof SettingsRoute
   '/staff': typeof StaffRoute
+  '/verification': typeof VerificationRoute
   '/book/$id': typeof BookIdRoute
   '/vets/$id': typeof VetsIdRoute
   '/vets/': typeof VetsIndexRoute
@@ -133,11 +178,16 @@ export interface FileRouteTypes {
     | '/admin'
     | '/auth'
     | '/bookings'
+    | '/clinic'
     | '/home'
+    | '/landing'
     | '/notifications'
     | '/pets'
     | '/profile'
+    | '/role'
+    | '/settings'
     | '/staff'
+    | '/verification'
     | '/book/$id'
     | '/vets/$id'
     | '/vets/'
@@ -147,11 +197,16 @@ export interface FileRouteTypes {
     | '/admin'
     | '/auth'
     | '/bookings'
+    | '/clinic'
     | '/home'
+    | '/landing'
     | '/notifications'
     | '/pets'
     | '/profile'
+    | '/role'
+    | '/settings'
     | '/staff'
+    | '/verification'
     | '/book/$id'
     | '/vets/$id'
     | '/vets'
@@ -161,11 +216,16 @@ export interface FileRouteTypes {
     | '/admin'
     | '/auth'
     | '/bookings'
+    | '/clinic'
     | '/home'
+    | '/landing'
     | '/notifications'
     | '/pets'
     | '/profile'
+    | '/role'
+    | '/settings'
     | '/staff'
+    | '/verification'
     | '/book/$id'
     | '/vets/$id'
     | '/vets/'
@@ -176,11 +236,16 @@ export interface RootRouteChildren {
   AdminRoute: typeof AdminRoute
   AuthRoute: typeof AuthRoute
   BookingsRoute: typeof BookingsRoute
+  ClinicRoute: typeof ClinicRoute
   HomeRoute: typeof HomeRoute
+  LandingRoute: typeof LandingRoute
   NotificationsRoute: typeof NotificationsRoute
   PetsRoute: typeof PetsRoute
   ProfileRoute: typeof ProfileRoute
+  RoleRoute: typeof RoleRoute
+  SettingsRoute: typeof SettingsRoute
   StaffRoute: typeof StaffRoute
+  VerificationRoute: typeof VerificationRoute
   BookIdRoute: typeof BookIdRoute
   VetsIdRoute: typeof VetsIdRoute
   VetsIndexRoute: typeof VetsIndexRoute
@@ -188,11 +253,32 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/verification': {
+      id: '/verification'
+      path: '/verification'
+      fullPath: '/verification'
+      preLoaderRoute: typeof VerificationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/staff': {
       id: '/staff'
       path: '/staff'
       fullPath: '/staff'
       preLoaderRoute: typeof StaffRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/settings': {
+      id: '/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof SettingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/role': {
+      id: '/role'
+      path: '/role'
+      fullPath: '/role'
+      preLoaderRoute: typeof RoleRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/profile': {
@@ -216,11 +302,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof NotificationsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/landing': {
+      id: '/landing'
+      path: '/landing'
+      fullPath: '/landing'
+      preLoaderRoute: typeof LandingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/home': {
       id: '/home'
       path: '/home'
       fullPath: '/home'
       preLoaderRoute: typeof HomeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/clinic': {
+      id: '/clinic'
+      path: '/clinic'
+      fullPath: '/clinic'
+      preLoaderRoute: typeof ClinicRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/bookings': {
@@ -280,11 +380,16 @@ const rootRouteChildren: RootRouteChildren = {
   AdminRoute: AdminRoute,
   AuthRoute: AuthRoute,
   BookingsRoute: BookingsRoute,
+  ClinicRoute: ClinicRoute,
   HomeRoute: HomeRoute,
+  LandingRoute: LandingRoute,
   NotificationsRoute: NotificationsRoute,
   PetsRoute: PetsRoute,
   ProfileRoute: ProfileRoute,
+  RoleRoute: RoleRoute,
+  SettingsRoute: SettingsRoute,
   StaffRoute: StaffRoute,
+  VerificationRoute: VerificationRoute,
   BookIdRoute: BookIdRoute,
   VetsIdRoute: VetsIdRoute,
   VetsIndexRoute: VetsIndexRoute,
