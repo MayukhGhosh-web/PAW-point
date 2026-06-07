@@ -10,7 +10,7 @@ export const Route = createFileRoute("/")({
 function Splash() {
   const navigate = useNavigate();
   useEffect(() => {
-    const t = setTimeout(() => navigate({ to: "/auth" }), 2800);
+    const t = setTimeout(() => navigate({ to: "/landing" }), 2200);
     return () => clearTimeout(t);
   }, [navigate]);
 
