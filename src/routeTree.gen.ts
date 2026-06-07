@@ -9,38 +9,241 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as StaffRouteImport } from './routes/staff'
+import { Route as ProfileRouteImport } from './routes/profile'
+import { Route as PetsRouteImport } from './routes/pets'
+import { Route as NotificationsRouteImport } from './routes/notifications'
+import { Route as HomeRouteImport } from './routes/home'
+import { Route as BookingsRouteImport } from './routes/bookings'
+import { Route as AuthRouteImport } from './routes/auth'
+import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as VetsIndexRouteImport } from './routes/vets.index'
+import { Route as VetsIdRouteImport } from './routes/vets.$id'
+import { Route as BookIdRouteImport } from './routes/book.$id'
 
+const StaffRoute = StaffRouteImport.update({
+  id: '/staff',
+  path: '/staff',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProfileRoute = ProfileRouteImport.update({
+  id: '/profile',
+  path: '/profile',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PetsRoute = PetsRouteImport.update({
+  id: '/pets',
+  path: '/pets',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NotificationsRoute = NotificationsRouteImport.update({
+  id: '/notifications',
+  path: '/notifications',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HomeRoute = HomeRouteImport.update({
+  id: '/home',
+  path: '/home',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BookingsRoute = BookingsRouteImport.update({
+  id: '/bookings',
+  path: '/bookings',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const VetsIndexRoute = VetsIndexRouteImport.update({
+  id: '/vets/',
+  path: '/vets/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const VetsIdRoute = VetsIdRouteImport.update({
+  id: '/vets/$id',
+  path: '/vets/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BookIdRoute = BookIdRouteImport.update({
+  id: '/book/$id',
+  path: '/book/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
+  '/auth': typeof AuthRoute
+  '/bookings': typeof BookingsRoute
+  '/home': typeof HomeRoute
+  '/notifications': typeof NotificationsRoute
+  '/pets': typeof PetsRoute
+  '/profile': typeof ProfileRoute
+  '/staff': typeof StaffRoute
+  '/book/$id': typeof BookIdRoute
+  '/vets/$id': typeof VetsIdRoute
+  '/vets/': typeof VetsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
+  '/auth': typeof AuthRoute
+  '/bookings': typeof BookingsRoute
+  '/home': typeof HomeRoute
+  '/notifications': typeof NotificationsRoute
+  '/pets': typeof PetsRoute
+  '/profile': typeof ProfileRoute
+  '/staff': typeof StaffRoute
+  '/book/$id': typeof BookIdRoute
+  '/vets/$id': typeof VetsIdRoute
+  '/vets': typeof VetsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
+  '/auth': typeof AuthRoute
+  '/bookings': typeof BookingsRoute
+  '/home': typeof HomeRoute
+  '/notifications': typeof NotificationsRoute
+  '/pets': typeof PetsRoute
+  '/profile': typeof ProfileRoute
+  '/staff': typeof StaffRoute
+  '/book/$id': typeof BookIdRoute
+  '/vets/$id': typeof VetsIdRoute
+  '/vets/': typeof VetsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/admin'
+    | '/auth'
+    | '/bookings'
+    | '/home'
+    | '/notifications'
+    | '/pets'
+    | '/profile'
+    | '/staff'
+    | '/book/$id'
+    | '/vets/$id'
+    | '/vets/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/admin'
+    | '/auth'
+    | '/bookings'
+    | '/home'
+    | '/notifications'
+    | '/pets'
+    | '/profile'
+    | '/staff'
+    | '/book/$id'
+    | '/vets/$id'
+    | '/vets'
+  id:
+    | '__root__'
+    | '/'
+    | '/admin'
+    | '/auth'
+    | '/bookings'
+    | '/home'
+    | '/notifications'
+    | '/pets'
+    | '/profile'
+    | '/staff'
+    | '/book/$id'
+    | '/vets/$id'
+    | '/vets/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AdminRoute: typeof AdminRoute
+  AuthRoute: typeof AuthRoute
+  BookingsRoute: typeof BookingsRoute
+  HomeRoute: typeof HomeRoute
+  NotificationsRoute: typeof NotificationsRoute
+  PetsRoute: typeof PetsRoute
+  ProfileRoute: typeof ProfileRoute
+  StaffRoute: typeof StaffRoute
+  BookIdRoute: typeof BookIdRoute
+  VetsIdRoute: typeof VetsIdRoute
+  VetsIndexRoute: typeof VetsIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/staff': {
+      id: '/staff'
+      path: '/staff'
+      fullPath: '/staff'
+      preLoaderRoute: typeof StaffRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/profile': {
+      id: '/profile'
+      path: '/profile'
+      fullPath: '/profile'
+      preLoaderRoute: typeof ProfileRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/pets': {
+      id: '/pets'
+      path: '/pets'
+      fullPath: '/pets'
+      preLoaderRoute: typeof PetsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/notifications': {
+      id: '/notifications'
+      path: '/notifications'
+      fullPath: '/notifications'
+      preLoaderRoute: typeof NotificationsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/home': {
+      id: '/home'
+      path: '/home'
+      fullPath: '/home'
+      preLoaderRoute: typeof HomeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/bookings': {
+      id: '/bookings'
+      path: '/bookings'
+      fullPath: '/bookings'
+      preLoaderRoute: typeof BookingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,22 +251,44 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/vets/': {
+      id: '/vets/'
+      path: '/vets'
+      fullPath: '/vets/'
+      preLoaderRoute: typeof VetsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/vets/$id': {
+      id: '/vets/$id'
+      path: '/vets/$id'
+      fullPath: '/vets/$id'
+      preLoaderRoute: typeof VetsIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/book/$id': {
+      id: '/book/$id'
+      path: '/book/$id'
+      fullPath: '/book/$id'
+      preLoaderRoute: typeof BookIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AdminRoute: AdminRoute,
+  AuthRoute: AuthRoute,
+  BookingsRoute: BookingsRoute,
+  HomeRoute: HomeRoute,
+  NotificationsRoute: NotificationsRoute,
+  PetsRoute: PetsRoute,
+  ProfileRoute: ProfileRoute,
+  StaffRoute: StaffRoute,
+  BookIdRoute: BookIdRoute,
+  VetsIdRoute: VetsIdRoute,
+  VetsIndexRoute: VetsIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
