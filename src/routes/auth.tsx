@@ -1,6 +1,6 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { motion } from "framer-motion";
-import { Apple, Mail, PawPrint } from "lucide-react";
+import { Apple, Mail, PawPrint, Stethoscope, UserRound } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
 
@@ -8,8 +8,11 @@ export const Route = createFileRoute("/auth")({
   component: AuthPage,
 });
 
+type Role = "owner" | "vet";
+
 function AuthPage() {
   const [mode, setMode] = useState<"login" | "register">("login");
+  const [role, setRole] = useState<Role>("owner");
   const navigate = useNavigate();
 
   return (
@@ -92,12 +95,38 @@ function AuthPage() {
             onSubmit={(e) => {
               e.preventDefault();
               toast.success(mode === "login" ? "Welcome back!" : "Account created!");
-              navigate({ to: "/home" });
+              if (mode === "register" && role === "vet") navigate({ to: "/verification" });
+              else navigate({ to: "/home" });
             }}
             className="mt-6 space-y-3"
           >
             {mode === "register" && (
-              <Field label="Full name" type="text" placeholder="Alex Morgan" />
+              <>
+                <div>
+                  <span className="text-xs font-medium text-muted-foreground">I'm a</span>
+                  <div className="mt-1 grid grid-cols-2 gap-2">
+                    {([
+                      { id: "owner", label: "Pet owner", icon: UserRound },
+                      { id: "vet", label: "Veterinarian", icon: Stethoscope },
+                    ] as const).map((r) => (
+                      <button
+                        type="button"
+                        key={r.id}
+                        onClick={() => setRole(r.id)}
+                        className={`h-12 rounded-xl border flex items-center justify-center gap-2 text-sm font-medium transition ${
+                          role === r.id
+                            ? "border-primary bg-primary/10 text-foreground"
+                            : "border-border text-muted-foreground hover:bg-secondary/60"
+                        }`}
+                      >
+                        <r.icon className="size-4" />
+                        {r.label}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+                <Field label="Full name" type="text" placeholder="Alex Morgan" />
+              </>
             )}
             <Field label="Email" type="email" placeholder="you@example.com" />
             <Field label="Password" type="password" placeholder="••••••••" />
