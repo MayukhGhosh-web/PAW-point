@@ -28,7 +28,7 @@ Install dependencies:
 npm install --legacy-peer-deps
 ```
 
-Start the development server:
+Start the development server :
 
 ```bash
 npm run dev
