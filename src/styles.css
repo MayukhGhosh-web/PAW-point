@@ -124,6 +124,11 @@
   --sidebar-accent-foreground: oklch(0.3 0.05 256);
   --sidebar-border: oklch(0.92 0.01 250);
   --sidebar-ring: oklch(0.7 0.12 245);
+
+  /* Shadow tokens */
+  --shadow-card: 0 1px 3px oklch(0.22 0.04 256 / 6%), 0 4px 16px oklch(0.22 0.04 256 / 6%);
+  --shadow-card-hover: 0 4px 12px oklch(0.22 0.04 256 / 10%), 0 12px 32px oklch(0.22 0.04 256 / 10%);
+  --shadow-primary: 0 4px 16px oklch(0.62 0.16 245 / 30%);
 }
 
 .dark {
@@ -173,6 +178,10 @@
   --sidebar-accent-foreground: oklch(0.97 0.01 240);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.7 0.12 245);
+
+  --shadow-card: 0 1px 3px oklch(0 0 0 / 20%), 0 4px 16px oklch(0 0 0 / 20%);
+  --shadow-card-hover: 0 4px 12px oklch(0 0 0 / 30%), 0 12px 32px oklch(0 0 0 / 25%);
+  --shadow-primary: 0 4px 16px oklch(0.72 0.15 245 / 30%);
 }
 
 @layer base {
@@ -183,15 +192,16 @@
   html, body {
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
     background-image:
-      radial-gradient(at 0% 0%, color-mix(in oklab, var(--sky) 60%, transparent) 0px, transparent 50%),
-      radial-gradient(at 100% 0%, color-mix(in oklab, var(--lavender) 50%, transparent) 0px, transparent 50%),
-      radial-gradient(at 50% 100%, color-mix(in oklab, var(--mint) 40%, transparent) 0px, transparent 50%);
+      radial-gradient(at 0% 0%, color-mix(in oklab, var(--sky) 55%, transparent) 0px, transparent 50%),
+      radial-gradient(at 100% 0%, color-mix(in oklab, var(--lavender) 45%, transparent) 0px, transparent 50%),
+      radial-gradient(at 50% 100%, color-mix(in oklab, var(--mint) 35%, transparent) 0px, transparent 50%);
     background-attachment: fixed;
   }
 
@@ -199,8 +209,14 @@
     font-family: var(--font-display);
     letter-spacing: -0.02em;
   }
+
+  /* Smooth scrolling */
+  html {
+    scroll-behavior: smooth;
+  }
 }
 
+/* ─── Glass utilities ─────────────────────────────────────── */
 @utility glass {
   background: color-mix(in oklab, var(--card) 60%, transparent);
   backdrop-filter: blur(20px) saturate(140%);
@@ -215,6 +231,112 @@
   border: 1px solid color-mix(in oklab, var(--border) 80%, transparent);
 }
 
+/* ─── Card hover — consistent lift + shadow ───────────────── */
+@utility card-hover {
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s ease;
+  box-shadow: var(--shadow-card);
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-card-hover);
+  }
+  &:active {
+    transform: translateY(-1px);
+  }
+}
+
+/* ─── Stat card ───────────────────────────────────────────── */
+@utility stat-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: 1rem;
+  border-radius: calc(var(--radius) + 4px);
+  background: color-mix(in oklab, var(--card) 60%, transparent);
+  backdrop-filter: blur(20px) saturate(140%);
+  -webkit-backdrop-filter: blur(20px) saturate(140%);
+  border: 1px solid color-mix(in oklab, var(--border) 80%, transparent);
+  min-width: 108px;
+  flex-shrink: 0;
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s ease;
+  box-shadow: var(--shadow-card);
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-card-hover);
+  }
+}
+
+/* ─── Quick action button ─────────────────────────────────── */
+@utility quick-action {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.875rem 0.5rem;
+  border-radius: calc(var(--radius) + 4px);
+  background: color-mix(in oklab, var(--card) 60%, transparent);
+  backdrop-filter: blur(20px) saturate(140%);
+  -webkit-backdrop-filter: blur(20px) saturate(140%);
+  border: 1px solid color-mix(in oklab, var(--border) 80%, transparent);
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s ease;
+  cursor: pointer;
+  flex: 1;
+  box-shadow: var(--shadow-card);
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-card-hover);
+  }
+  &:active {
+    transform: scale(0.97);
+  }
+}
+
+/* ─── Scrollbar hide ──────────────────────────────────────── */
+@utility scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* ─── Text balance ────────────────────────────────────────── */
 @utility text-balance {
   text-wrap: balance;
+}
+
+/* ─── Focus ring ──────────────────────────────────────────── */
+@utility focus-ring {
+  &:focus-visible {
+    outline: 2px solid var(--color-ring);
+    outline-offset: 2px;
+  }
+}
+
+/* ─── Shimmer animation ───────────────────────────────────── */
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+@utility shimmer-bg {
+  background: linear-gradient(
+    90deg,
+    oklch(1 0 0 / 0%) 0%,
+    oklch(1 0 0 / 12%) 40%,
+    oklch(1 0 0 / 20%) 50%,
+    oklch(1 0 0 / 12%) 60%,
+    oklch(1 0 0 / 0%) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+/* ─── Pulse dot ───────────────────────────────────────────── */
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.85); }
+}
+
+@utility pulse-dot {
+  animation: pulse-dot 2s ease-in-out infinite;
 }
