@@ -1,3 +1,31 @@
+/* ─────────────────────────────────────────────
+   VetCare Mock Data
+   ───────────────────────────────────────────── */
+
+/* ── User ─────────────────────────────────── */
+export type User = {
+  id: string;
+  name: string;
+  firstName: string;
+  email: string;
+  avatar: string;
+  location: string;
+  memberSince: string;
+  plan: "free" | "premium";
+};
+
+export const currentUser: User = {
+  id: "u1",
+  name: "Alex Morgan",
+  firstName: "Alex",
+  email: "alex.morgan@example.com",
+  avatar: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=200&q=80",
+  location: "San Francisco, CA",
+  memberSince: "Jan 2025",
+  plan: "premium",
+};
+
+/* ── Vets ─────────────────────────────────── */
 export type Vet = {
   id: string;
   name: string;
@@ -12,6 +40,7 @@ export type Vet = {
   address: string;
   about: string;
   available: string[];
+  availableToday: boolean;
   tags: string[];
 };
 
@@ -31,6 +60,7 @@ export const vets: Vet[] = [
     about:
       "Board-certified small animal surgeon with a focus on minimally invasive procedures and orthopedic care.",
     available: ["09:00", "10:30", "13:00", "15:30", "16:30"],
+    availableToday: true,
     tags: ["Surgery", "Orthopedic", "Dogs", "Cats"],
   },
   {
@@ -47,6 +77,7 @@ export const vets: Vet[] = [
     address: "48 Linden Ave, Eastside",
     about: "Skin specialist treating allergies, infections and chronic dermatological conditions in pets.",
     available: ["08:30", "11:00", "14:00", "17:00"],
+    availableToday: true,
     tags: ["Dermatology", "Allergies"],
   },
   {
@@ -63,6 +94,7 @@ export const vets: Vet[] = [
     address: "9 Orchard Lane, Northpark",
     about: "Cares for birds, reptiles, and small mammals with gentle, evidence-based medicine.",
     available: ["10:00", "12:00", "14:30", "16:00"],
+    availableToday: false,
     tags: ["Exotic", "Birds", "Reptiles"],
   },
   {
@@ -79,10 +111,12 @@ export const vets: Vet[] = [
     address: "12 Maple Court, Westend",
     about: "Pet dental cleanings, extractions, and oral health programs.",
     available: ["09:30", "11:30", "13:30", "15:00"],
+    availableToday: true,
     tags: ["Dental", "Cleaning"],
   },
 ];
 
+/* ── Pets ─────────────────────────────────── */
 export type Pet = {
   id: string;
   name: string;
@@ -92,6 +126,11 @@ export type Pet = {
   weight: string;
   image: string;
   color: "mint" | "lavender" | "sky";
+  healthScore: number; // 0–100
+  lastVisit: string;
+  nextVaccine: string;
+  microchipped: boolean;
+  insured: boolean;
 };
 
 export const pets: Pet[] = [
@@ -104,6 +143,11 @@ export const pets: Pet[] = [
     weight: "28 kg",
     image: "https://images.unsplash.com/photo-1552053831-71594a27632d?w=400&q=80",
     color: "sky",
+    healthScore: 92,
+    lastVisit: "May 22, 2026",
+    nextVaccine: "Jun 12, 2026",
+    microchipped: true,
+    insured: true,
   },
   {
     id: "p2",
@@ -114,6 +158,11 @@ export const pets: Pet[] = [
     weight: "4.2 kg",
     image: "https://images.unsplash.com/photo-1574158622682-e40e69881006?w=400&q=80",
     color: "lavender",
+    healthScore: 78,
+    lastVisit: "Jun 05, 2026",
+    nextVaccine: "Jun 18, 2026",
+    microchipped: true,
+    insured: false,
   },
   {
     id: "p3",
@@ -124,18 +173,27 @@ export const pets: Pet[] = [
     weight: "90 g",
     image: "https://images.unsplash.com/photo-1551085254-e96b210db58a?w=400&q=80",
     color: "mint",
+    healthScore: 95,
+    lastVisit: "May 02, 2026",
+    nextVaccine: "Nov 02, 2026",
+    microchipped: false,
+    insured: false,
   },
 ];
 
+/* ── Bookings ─────────────────────────────── */
 export type Booking = {
   id: string;
   petName: string;
   vetName: string;
+  vetImage: string;
   specialty: string;
   date: string;
   time: string;
   status: "upcoming" | "completed" | "cancelled";
   price: number;
+  clinicName: string;
+  notes?: string;
 };
 
 export const bookings: Booking[] = [
@@ -143,54 +201,126 @@ export const bookings: Booking[] = [
     id: "b1",
     petName: "Luna",
     vetName: "Dr. Amelia Hart",
+    vetImage: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=200&q=80",
     specialty: "Annual Checkup",
     date: "Jun 12, 2026",
     time: "10:30",
     status: "upcoming",
     price: 65,
+    clinicName: "PawPrint Veterinary Clinic",
+    notes: "Bring vaccination records",
   },
   {
     id: "b2",
     petName: "Mochi",
     vetName: "Dr. Marcus Lee",
+    vetImage: "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=200&q=80",
     specialty: "Skin Allergy Follow-up",
     date: "Jun 18, 2026",
     time: "14:00",
     status: "upcoming",
     price: 55,
+    clinicName: "GreenLeaf Animal Hospital",
   },
   {
     id: "b3",
     petName: "Luna",
     vetName: "Dr. Noah Bennett",
+    vetImage: "https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=200&q=80",
     specialty: "Dental Cleaning",
     date: "May 22, 2026",
     time: "11:30",
     status: "completed",
     price: 50,
+    clinicName: "BrightSmile Pet Dentistry",
   },
   {
     id: "b4",
     petName: "Kiwi",
     vetName: "Dr. Priya Shah",
+    vetImage: "https://images.unsplash.com/photo-1594824476967-48c8b964273f?w=200&q=80",
     specialty: "Wellness Exam",
     date: "May 02, 2026",
     time: "16:00",
     status: "completed",
     price: 75,
+    clinicName: "Wildwing Exotic Vet",
   },
   {
     id: "b5",
     petName: "Mochi",
     vetName: "Dr. Amelia Hart",
+    vetImage: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=200&q=80",
     specialty: "Vaccination",
     date: "Apr 14, 2026",
     time: "09:00",
     status: "cancelled",
     price: 40,
+    clinicName: "PawPrint Veterinary Clinic",
   },
 ];
 
+/* ── Activity Feed ────────────────────────── */
+export type ActivityItem = {
+  id: string;
+  type: "visit" | "prescription" | "reminder" | "vaccination" | "note";
+  petName: string;
+  petColor: "mint" | "lavender" | "sky";
+  title: string;
+  detail: string;
+  time: string;
+};
+
+export const activityFeed: ActivityItem[] = [
+  {
+    id: "a1",
+    type: "visit",
+    petName: "Luna",
+    petColor: "sky",
+    title: "Appointment confirmed",
+    detail: "Annual Checkup with Dr. Amelia Hart",
+    time: "2h ago",
+  },
+  {
+    id: "a2",
+    type: "prescription",
+    petName: "Mochi",
+    petColor: "lavender",
+    title: "New prescription added",
+    detail: "Apoquel 16mg — 1 tablet daily for 14 days",
+    time: "Yesterday",
+  },
+  {
+    id: "a3",
+    type: "reminder",
+    petName: "Mochi",
+    petColor: "lavender",
+    title: "Vaccination reminder",
+    detail: "Mochi's annual rabies booster due in 8 days",
+    time: "Yesterday",
+  },
+  {
+    id: "a4",
+    type: "vaccination",
+    petName: "Luna",
+    petColor: "sky",
+    title: "Dental cleaning completed",
+    detail: "Bravecto Chew prescribed post-visit",
+    time: "May 22",
+  },
+];
+
+/* ── Dashboard Stats ──────────────────────── */
+export const dashboardStats = {
+  totalPets: pets.length,
+  upcomingBookings: bookings.filter((b) => b.status === "upcoming").length,
+  activePrescriptions: 2,
+  totalSpendThisMonth: bookings
+    .filter((b) => b.status === "completed" && b.date.startsWith("May"))
+    .reduce((sum, b) => sum + b.price, 0),
+};
+
+/* ── Notifications ────────────────────────── */
 export type Notification = {
   id: string;
   title: string;
@@ -235,6 +365,7 @@ export const notifications: Notification[] = [
   },
 ];
 
+/* ── Prescriptions ────────────────────────── */
 export type Prescription = {
   id: string;
   petName: string;
