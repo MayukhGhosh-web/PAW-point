@@ -45,7 +45,15 @@ function Notifs() {
               </div>
               <div className="flex-1 min-w-0">
                 <div className="flex items-center justify-between gap-2">
-                  <div className="font-semibold text-sm truncate">{n.title}</div>
+                  <div className="flex items-center gap-2">
+  <div className="font-semibold text-sm truncate">
+    {n.title}
+  </div>
+
+  <span className="text-[10px] px-2 py-1 rounded-full bg-muted">
+    {n.type}
+  </span>
+</div>
                   <span className="text-[11px] text-muted-foreground shrink-0">{n.time}</span>
                 </div>
                 <p className="text-xs text-muted-foreground mt-1">{n.body}</p>
@@ -58,3 +66,4 @@ function Notifs() {
     </AppShell>
   );
 }
+
