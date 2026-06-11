@@ -134,7 +134,7 @@ export type Booking = {
   specialty: string;
   date: string;
   time: string;
-  status: "upcoming" | "completed" | "cancelled";
+  status: "pending" | "upcoming" | "confirmed" | "completed" | "cancelled";
   price: number;
 };
 
@@ -146,7 +146,7 @@ export const bookings: Booking[] = [
     specialty: "Annual Checkup",
     date: "Jun 12, 2026",
     time: "10:30",
-    status: "upcoming",
+    status: "confirmed",
     price: 65,
   },
   {
@@ -188,6 +188,76 @@ export const bookings: Booking[] = [
     time: "09:00",
     status: "cancelled",
     price: 40,
+  },
+  {
+    id: "b6",
+    petName: "Luna",
+    vetName: "Dr. Marcus Lee",
+    specialty: "Flea & Tick Prevention",
+    date: "Jun 25, 2026",
+    time: "09:00",
+    status: "pending",
+    price: 35,
+  },
+  {
+    id: "b7",
+    petName: "Mochi",
+    vetName: "Dr. Priya Shah",
+    specialty: "Exotic Pet Consultation",
+    date: "Jun 20, 2026",
+    time: "13:30",
+    status: "pending",
+    price: 75,
+  },
+  {
+    id: "b8",
+    petName: "Kiwi",
+    vetName: "Dr. Noah Bennett",
+    specialty: "Vaccination",
+    date: "Jun 15, 2026",
+    time: "15:00",
+    status: "confirmed",
+    price: 50,
+  },
+  {
+    id: "b9",
+    petName: "Luna",
+    vetName: "Dr. Priya Shah",
+    specialty: "Post-Surgery Follow-up",
+    date: "Apr 28, 2026",
+    time: "14:00",
+    status: "completed",
+    price: 85,
+  },
+  {
+    id: "b10",
+    petName: "Mochi",
+    vetName: "Dr. Noah Bennett",
+    specialty: "Dental Scaling",
+    date: "Jun 05, 2026",
+    time: "10:00",
+    status: "completed",
+    price: 60,
+  },
+  {
+    id: "b11",
+    petName: "Luna",
+    vetName: "Dr. Amelia Hart",
+    specialty: "Orthopedic Consultation",
+    date: "May 18, 2026",
+    time: "16:30",
+    status: "cancelled",
+    price: 95,
+  },
+  {
+    id: "b12",
+    petName: "Kiwi",
+    vetName: "Dr. Marcus Lee",
+    specialty: "Skin Fungal Check",
+    date: "Jun 22, 2026",
+    time: "11:00",
+    status: "upcoming",
+    price: 55,
   },
 ];
 
