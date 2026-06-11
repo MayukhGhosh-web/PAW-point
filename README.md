@@ -16,7 +16,7 @@ PAW-point is a veterinary appointment and pet healthcare platform built for pet 
 
 ## Getting Started
 
-Clone the repository:
+Clone the repository :
 
 ```bash
 git clone https://github.com/YOUR_USERNAME/PAW-point.git
